@@ -14,8 +14,8 @@ document.getElementById('humidityCalcForm').addEventListener('submit', function(
 
     // Функция для расчета абсолютной влажности в г/м³
     function absoluteHumidity(temperature, humidity) {
-        const P = saturationPressure(temperature); // Давление насыщения
-        return (humidity / 100) * P; // Абсолютная влажность в г/м³ (без дополнительного коэффициента)
+        const P = saturationPressure(temperature);  // Давление насыщения
+        return (humidity / 100) * P;  // Абсолютная влажность в г/м³
     }
 
     // Абсолютная влажность за окном
