@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор увлажнения</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Калькулятор увлажнения</h1>
+        <form id="humidityCalcForm">
+            <label for="outsideTemp">Температура за окном (°C):</label>
+            <input type="number" id="outsideTemp" required>
+
+            <label for="outsideHumidity">Влажность за окном (%):</label>
+            <input type="number" id="outsideHumidity" required>
+
+            <label for="insideTemp">Температура в помещении (°C):</label>
+            <input type="number" id="insideTemp" required>
+
+            <label for="insideHumidity">Необходимая влажность в помещении (%):</label>
+            <input type="number" id="insideHumidity" required>
+
+            <label for="airflowPower">Мощность притока воздуха (м³/ч):</label>
+            <input type="number" id="airflowPower" required>
+
+            <button type="submit">Рассчитать</button>
+        </form>
+
+        <div id="result">
+            <h3>Результат:</h3>
+            <p id="resultText"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
