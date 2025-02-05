@@ -1,4 +1,3 @@
-
 document.getElementById('humidityCalcForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -8,12 +7,32 @@ document.getElementById('humidityCalcForm').addEventListener('submit', function(
     const insideHumidity = parseFloat(document.getElementById('insideHumidity').value);
     const airflowPower = parseFloat(document.getElementById('airflowPower').value);
 
-    // Формула для расчета необходимого увлажнения
-    const humidityDiff = insideHumidity - outsideHumidity;
-    const airDensity = 1.225; // плотность воздуха в кг/м³ (при 20°C)
-    const waterVaporDiff = humidityDiff * 0.003; // изменение массы водяного пара в воздухе
+    // Функция для расчета максимальной плотности водяного пара при температуре
+    function saturationPressure(temperature) {
+        return 6.112 * Math.exp((17.67 * temperature) / (temperature + 243.5));
+    }
 
-    const resultInLiters = airflowPower * waterVaporDiff * airDensity / 1000;
+    // Функция для расчета абсолютной влажности в г/м³
+    function absoluteHumidity(temperature, humidity) {
+        const P = saturationPressure(temperature); // давление насыщения
+        return (humidity / 100) * P * 2.167;
+    }
 
-    document.getElementById('resultText').textContent = `Необходимое увлажнение: ${resultInLiters.toFixed(2)} литров в час.`;
+    // Абсолютная влажность за окном
+    const outsideAbsoluteHumidity = absoluteHumidity(outsideTemp, outsideHumidity);
+    
+    // Абсолютная влажность в помещении
+    const insideAbsoluteHumidity = absoluteHumidity(insideTemp, insideHumidity);
+
+    // Разница в абсолютной влажности
+    const humidityDifference = insideAbsoluteHumidity - outsideAbsoluteHumidity;
+
+    // Необходимое увлажнение в граммах в час
+    const requiredWaterInGrams = humidityDifference * airflowPower;
+
+    // Переводим граммы в литры
+    const requiredWaterInLiters = requiredWaterInGrams / 1000;
+
+    // Отображаем результат
+    document.getElementById('resultText').textContent = `Необходимое увлажнение: ${requiredWaterInLiters.toFixed(2)} литров в час.`;
 });
