@@ -34,5 +34,5 @@ document.getElementById('humidityCalcForm').addEventListener('submit', function(
     const requiredWaterInLiters = requiredWaterInGrams / 1000;
 
     // Отображаем результат
-    document.getElementById('resultText').textContent = `Необходимое увлажнение: ${requiredWaterInLiters.toFixed(2)} литров в час.`;
+    document.getElementById('resultText').textContent = `Необходимое увлажнение: ${requiredWaterInLiters.toFixed(4)} литров в час.`;
 });
